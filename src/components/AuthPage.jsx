@@ -3,13 +3,14 @@ import { motion } from "framer-motion";
 import { FcGoogle } from "react-icons/fc";
 import { Mail, Lock, Eye, EyeOff, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import toast from "react-hot-toast";
 import logo from '../assets/logo 2.svg';
 
 const AuthPage = () => {
     const [isSignUp, setIsSignUp] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -17,7 +18,11 @@ const AuthPage = () => {
         confirmPassword: "",
     });
 
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
+    const { login } = useAuth();
 
     //Handle input change
     const handleChange = (e) => {
@@ -27,10 +32,47 @@ const AuthPage = () => {
     // Handle form submission 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError("");
 
-        if (isSignUp && formData.password !== formData.confirmPassword) {
-            alert("Password do not match");
-            return;
+        if (isSignUp) {
+            //Required fields check
+            if (!formData.name || !formData.email || !formData.password || !formData.confirmPassword) {
+                setError("All fields are required");
+                return;
+            }
+
+            //email format validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(formData.email)) {
+                setError("Please enter a valid email address");
+                return;
+            }
+
+            //password lenght
+            if (formData.password.length < 6) {
+                setError("Password must be at least 6 character");
+                return;
+            }
+
+            //confirm passowrd check 
+            if (formData.password !== formData.confirmPassword) {
+                setError("Password does not match");
+                return;
+            }
+
+        } else {
+            // for login only email & pass required
+            if (!formData.email || !formData.password) {
+                setError("Please enter both email and passowrd");
+                return;
+            }
+
+            //email format validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(formData.email)) {
+                setError("Please enter a valid email address");
+                return;
+            }
         }
 
         const endpoint = isSignUp ? "signup" : "login";
@@ -54,20 +96,38 @@ const AuthPage = () => {
                 throw new Error(data.message || "Something went wrong");
             }
 
-            // save token to localstorage
-            if (data.token) {
-                localStorage.setItem("token", data.token);
-                localStorage.setItem("user", JSON.stringify(data.user));
+            // handle success and save token to localstorage
+            if (isSignUp) {
+                toast.success("Account created successfully! Please login.");
+
+                setFormData({
+                    name: "",
+                    email: "",
+                    password: "",
+                    confirmPassword: "",
+                });
+
+                setIsSignUp(false);
+            } else {
+                if (data.token) {
+                    localStorage.setItem("token", data.token);
+                    login(data.user);
+                    toast.success("Logged in successfully!");
+
+                    setFormData({
+                        name: "",
+                        email: "",
+                        password: "",
+                        confirmPassword: "",
+                    });
+
+                    navigate("/dashboard");
+                }
             }
-
-            alert(data.message || (isSignUp ? "Signup successful!" : "Login successful!"))
-            console.log("Auth success: ", data);
-
-            navigate("/dashboard");
 
         } catch (error) {
             console.error("Auth error:", error);
-            alert(error.message);
+            setError(error.message);
         } finally {
             setLoading(false);
         }
@@ -75,8 +135,8 @@ const AuthPage = () => {
 
     return (
         <div className="min-h-screen flex justify-center items-center  bg-gray-100 font-inter">
-
             <div className="relative w-[800px] h-[600px] bg-white rounded-2xl shadow-lg overflow-hidden flex">
+
                 {/* Lft side form */}
                 <motion.div
                     animate={{ x: isSignUp ? "320px" : "0px" }}
@@ -88,7 +148,11 @@ const AuthPage = () => {
                         {isSignUp ? "Create Account" : "Sign in to FinTrack"}
                     </h2>
 
-                    <button className="flex items-center justify-center gap-2 text-[#333333] hover:text-[00B894] transition-all duration-300 font-medium mb-3">
+                    {/* Google sign in */}
+                    <button
+                        disabled={loading}
+                        className="flex items-center justify-center gap-2 text-[#333333] hover:text-[00B894] transition-all duration-300 font-medium mb-3"
+                    >
                         <FcGoogle size={20} />
                         {isSignUp ? "Sign up with Google" : "Sign in with Google"}
                     </button>
@@ -175,16 +239,33 @@ const AuthPage = () => {
                         )}
 
                         {!isSignUp && (
-                            <p className="text-[#64748B] text-[14px] hover:text-[#00B894] cursor-pointer">
+                            <p 
+                                onClick={() => navigate("/forgot-password")}
+                                className="text-[#64748B] text-[14px] hover:text-[#00B894] cursor-pointer">
                                 Forgot Password?
                             </p>
                         )}
 
+                        {/* error message */}
+                        {error && (
+                            <motion.p
+                                initial={{ opacity: 0, y: -5 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="text-red-500 text-sm mt-2 text-center font-medium"
+                            >
+                                {error}
+                            </motion.p>
+                        )}
+
                         <button
                             type="submit"
-                            className="w-[160px] h-[40px] bg-[#00B894] hover:bg-[#00DCA0] text-white font-medium text-[16px] rounded-md transition-all"
+                            className={`w-[160px] h-[40px] flex justify-center items-center bg-[#00B894]  text-white font-medium text-[16px] rounded-md transition-all ${loading ? "opacity-70 cursor-not-allowed" : "hover:bg-[#00DCA0]"}`}
                         >
-                            {isSignUp ? "SIGN UP" : "SIGN IN"}
+                            {loading ? (
+                                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                            ) : (
+                                isSignUp ? "SIGN UP" : "SIGN IN"
+                            )}
                         </button>
                     </form>
                 </motion.div>
@@ -214,7 +295,19 @@ const AuthPage = () => {
 
 
                         <button
-                            onClick={() => setIsSignUp(!isSignUp)}
+                            onClick={() => {
+                                setFormData({
+                                    name: "",
+                                    email: "",
+                                    password: "",
+                                    confirmPassword: "",
+                                });
+                                setError("");
+                                setShowPassword(false);
+                                setShowConfirmPassword(false);
+                                setIsSignUp(!isSignUp);
+                            }}
+                            disabled={loading}
                             className="w-[160px] h-[40px] bg-white text-[#00B894] font-medium text-[16px] rounded-md hover:bg-gray-100 transition-all"
                         >
                             {isSignUp ? "SIGN IN" : "SIGN UP"}
