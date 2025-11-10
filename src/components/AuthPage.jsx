@@ -134,30 +134,30 @@ const AuthPage = () => {
     };
 
     return (
-        <div className="min-h-screen flex justify-center items-center  bg-gray-100 font-inter">
-            <div className="relative w-[800px] h-[600px] bg-white rounded-2xl shadow-lg overflow-hidden flex">
+        <div className="min-h-screen flex justify-center items-center  bg-gray-100 font-inter px-4">
+            <div className="relative w-full max-w-[800px] h-auto md:h-[600px] bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row mx-2 md:mx-0">
 
                 {/* Lft side form */}
                 <motion.div
                     animate={{ x: isSignUp ? "320px" : "0px" }}
                     transition={{ duration: 0.7, ease: "easeInOut" }}
-                    className="relative z-20 w-[480px] h-full flex flex-col justify-center items-center px-[60px] py-[50px] bg-white"
+                    className="relative z-20 w-full md:w-[480px] h-auto md:h-full flex flex-col justify-center items-center px-6 md:px-[60px] py-8 md:py-[50px] bg-white"
                 >
 
-                    <h2 className="text-[32px] font-inter font-bold text-[#333333] leading-[40px] mb-5">
+                    <h2 className="text-[24px] md:text-[32px] font-inter font-bold text-[#333333] leading-[32px] md:leading-[40px] mb-5 text-center md:text-left">
                         {isSignUp ? "Create Account" : "Sign in to FinTrack"}
                     </h2>
 
                     {/* Google sign in */}
                     <button
                         disabled={loading}
-                        className="flex items-center justify-center gap-2 text-[#333333] hover:text-[00B894] transition-all duration-300 font-medium mb-3"
+                        className="flex items-center justify-center gap-2 text-[#333333] hover:text-[00B894] transition-all duration-300 font-medium mb-3 "
                     >
                         <FcGoogle size={20} />
                         {isSignUp ? "Sign up with Google" : "Sign in with Google"}
                     </button>
 
-                    <p className="text-[#999999] text-[12px] leading-[20px] font-inter mb-4">
+                    <p className="text-[#999999] text-[12px] md:text-[13px] leading-[20px] font-inter mb-4 text-center md:text-left">
                         {isSignUp ? "or use your email for registration" : "or use your account "}
                     </p>
 
@@ -171,7 +171,7 @@ const AuthPage = () => {
                                     placeholder="Name"
                                     value={formData.name}
                                     onChange={handleChange}
-                                    className="flex-1 bg-transparent outline-none text-[#333333] text-[14px] placeholder-[#999999] pl-9 pr-3"
+                                    className="w-full max-w-[320px] flex-1 bg-transparent outline-none text-[#333333] text-[14px] placeholder-[#999999] pl-9 pr-3"
                                 />
                             </div>
                         )}
@@ -184,7 +184,7 @@ const AuthPage = () => {
                                 placeholder="Email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                className="flex-1 bg-transparent outline-none text-[#333333] text-[14px] placeholder-[#999999] pl-9 pr-3"
+                                className="w-full max-w-[320px] flex-1 bg-transparent outline-none text-[#333333] text-[14px] placeholder-[#999999] pl-9 pr-3"
                             />
                         </div>
 
@@ -196,7 +196,7 @@ const AuthPage = () => {
                                 placeholder="Password"
                                 value={formData.password}
                                 onChange={handleChange}
-                                className="flex-1 bg-transparent outline-none text-[#333333] text-[14px] placeholder-[#999999] pl-9 pr-3"
+                                className="w-full max-w-[320px] flex-1 bg-transparent outline-none text-[#333333] text-[14px] placeholder-[#999999] pl-9 pr-3"
                             />
                             {showPassword ? (
                                 <EyeOff
@@ -221,7 +221,7 @@ const AuthPage = () => {
                                     placeholder="Confirm Password"
                                     value={formData.confirmPassword}
                                     onChange={handleChange}
-                                    className="flex-1 bg-transparent outline-none text-[#333333] text-[14px] placeholder-[#999999] pl-9 pr-3"
+                                    className="w-full max-w-[320px] flex-1 bg-transparent outline-none text-[#333333] text-[14px] placeholder-[#999999] pl-9 pr-3"
                                 />
                                 {showConfirmPassword ? (
                                     <EyeOff
@@ -259,7 +259,7 @@ const AuthPage = () => {
 
                         <button
                             type="submit"
-                            className={`w-[160px] h-[40px] flex justify-center items-center bg-[#00B894]  text-white font-medium text-[16px] rounded-md transition-all ${loading ? "opacity-70 cursor-not-allowed" : "hover:bg-[#00DCA0]"}`}
+                            className={`w-full max-w-[320px] h-[40px] flex justify-center items-center bg-[#00B894]  text-white font-medium text-[16px] rounded-md transition-all ${loading ? "opacity-70 cursor-not-allowed" : "hover:bg-[#00DCA0]"}`}
                         >
                             {loading ? (
                                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
@@ -274,7 +274,7 @@ const AuthPage = () => {
                 <motion.div
                     animate={{ x: isSignUp ? "-480px" : "0px" }}
                     transition={{ duration: 0.7, ease: "easeInOut" }}
-                    className="absolute right-0 w-[320px] h-full bg-gradient-to-br from-emerald-600 to-teal-500 text-white flex flex-col justify-center items-center text-center px-10 py-10 z-10"
+                    className="absolute md:static right-0 order-first md:order-none w-full md:w-[320px] h-[250px] md:h-full bg-gradient-to-br from-emerald-600 to-teal-500 text-white flex flex-col justify-center items-center text-center px-8 py-8 md:px-10 md:py-10 z-10"
                 >
 
                     <div className="w-full flex justify-center mb-auto">
@@ -282,7 +282,7 @@ const AuthPage = () => {
                     </div>
 
                     <div className="flex flex-col items-center justify-center flex-1">
-                        <h2 className="text-[32px] font-bold leading-[44px] mb-3 whitespace-nowrap">
+                        <h2 className="text-[24px] md:text-[32px] font-bold leading-[32px] md:leading-[44px] mb-5 text-center md:text-left whitespace-nowrap">
                             {isSignUp ? "Welcome Back!" : "Hello, Friend!"}
                         </h2>
 
@@ -308,7 +308,7 @@ const AuthPage = () => {
                                 setIsSignUp(!isSignUp);
                             }}
                             disabled={loading}
-                            className="w-[160px] h-[40px] bg-white text-[#00B894] font-medium text-[16px] rounded-md hover:bg-gray-100 transition-all"
+                            className="w-full max-w-[320px] h-[40px] bg-white text-[#00B894] font-medium text-[16px] rounded-md hover:bg-gray-100 transition-all"
                         >
                             {isSignUp ? "SIGN IN" : "SIGN UP"}
                         </button>
