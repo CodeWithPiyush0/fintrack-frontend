@@ -8,13 +8,13 @@ import {
   PointElement,
   Tooltip,
   Legend,
-  layouts,
+  Filler
 } from "chart.js"
 import { TrendingUp } from 'lucide-react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
+ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend, Filler);
 
 ChartJS.defaults.font.family = "Inter, sans-serif";
 
@@ -27,17 +27,20 @@ const LineChartCard = ({ filter }) => {
 
   useEffect(() => {
     let labels, incomeData, expenseData;
+
     switch (filter) {
       case "This Month":
         labels = ["Week 1", "Week 2", "Week 3", "Week 4"];
         incomeData = [4000, 4500, 4800, 5000];
         expenseData = [3200, 3500, 3700, 3900];
         break;
+
       case "Last Year":
         labels = ["Q1", "Q2", "Q3", "Q4"];
         incomeData = [42000, 46000, 49000, 51000];
         expenseData = [33000, 37000, 41000, 43000];
         break;
+
       default:
         labels = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         incomeData = [12000, 14000, 13000, 15000, 17000, 18000, 16000, 19000, 20000, 21000, 23000, 25000];
@@ -102,7 +105,7 @@ const LineChartCard = ({ filter }) => {
           color: "#64748B", 
           font: { family: "Inter", size: 11 },
           maxRotation: 45,
-          minRotatoin: 0,
+          minRotation: 0,
         },
         grid: { display: false },
       },

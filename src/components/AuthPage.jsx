@@ -151,7 +151,7 @@ const AuthPage = () => {
                     {/* Google sign in */}
                     <button
                         disabled={loading}
-                        className="flex items-center justify-center gap-2 text-[#333333] hover:text-[00B894] transition-all duration-300 font-medium mb-3 "
+                        className="flex items-center justify-center gap-2 text-[#333333] hover:text-[#00B894] transition-all duration-300 font-medium mb-3 "
                     >
                         <FcGoogle size={20} />
                         {isSignUp ? "Sign up with Google" : "Sign in with Google"}
@@ -278,7 +278,7 @@ const AuthPage = () => {
                 >
 
                     <div className="w-full flex justify-center mb-auto">
-                        <img src={logo} alt="FinTrack Logo" className="w-[96px] h-[32] mb-2" />
+                        <img src={logo} alt="FinTrack Logo" className="w-[96px] h-[32px] mb-2" />
                     </div>
 
                     <div className="flex flex-col items-center justify-center flex-1">

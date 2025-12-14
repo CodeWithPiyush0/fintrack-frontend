@@ -67,7 +67,7 @@ const Navbar = () => {
 
             {/* Mobile menu */}
             <div
-                className={`md:hidden bg-white border-t transition-all duraiton-300 overflow-hidden ${menuOpen ? "max-h-96" : "max-h-0"
+                className={`md:hidden bg-white border-t transition-all duration-300 overflow-hidden ${menuOpen ? "max-h-96" : "max-h-0"
                     }`}
             >
                 <div className="flex flex-col items-center py-4 space-y-4  text-gray-700 font-regular">
@@ -89,7 +89,7 @@ const Navbar = () => {
                         <UserCircle className="w-6 h-6 text-gray-600 hover:text-[#00b894]" />
                         <LogOut
                             onClick={handleLogout}
-                            className="w-6 h-6 text-gray-600 cursor-pointer hover:text-[#00b894] trnasition"
+                            className="w-6 h-6 text-gray-600 cursor-pointer hover:text-[#00b894] transition"
                         />
                     </div>
                 </div>
