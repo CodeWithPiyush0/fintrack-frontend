@@ -1,5 +1,5 @@
 import React from 'react'
-import { useGoals } from '../context/GoalContext'
+import { useGoals } from '../context/GoalsContext'
 
 const GoalCardList = ({ onEdit, onDelete }) => {
 

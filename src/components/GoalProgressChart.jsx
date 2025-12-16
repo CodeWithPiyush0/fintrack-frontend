@@ -1,7 +1,7 @@
 import React from 'react'
 import { Bar } from 'react-chartjs-2'
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Tooltip, Legend } from 'chart.js'
-import { useGoals } from '../context/GoalContext'
+import { useGoals } from '../context/GoalsContext'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 ChartJS.defaults.font.family = "Inter, sans-serif";

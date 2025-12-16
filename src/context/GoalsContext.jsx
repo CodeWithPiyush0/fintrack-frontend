@@ -129,4 +129,4 @@ export const GoalsProvider = ({ children }) => {
     );
 };
 
-export const useGoals = () => useContext(GoalsContext);
+export const useGoals = () => useContext(GoalsContext)
