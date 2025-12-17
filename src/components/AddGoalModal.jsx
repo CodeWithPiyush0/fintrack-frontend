@@ -42,8 +42,8 @@ const AddGoalModal = ({ onClose, onAdd }) => {
             <input
               type="text"
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
-              value={form.target}
-              onChange={(e) => setForm({ ...form, target: e.target.value })}
+              value={form.title}
+              onChange={(e) => setForm({ ...form, title: e.target.value })}
               required
             />
           </div>
@@ -71,8 +71,7 @@ const AddGoalModal = ({ onClose, onAdd }) => {
                 min="0"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 value={form.saved}
-                onChange={(e) => setForm({ ...form, target: e.target.value })}
-                required
+                onChange={(e) => setForm({ ...form, saved: e.target.value })}
               />
             </div>
           </div>

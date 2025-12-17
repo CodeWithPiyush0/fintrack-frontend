@@ -43,9 +43,11 @@ export const GoalsProvider = ({ children }) => {
     }, [goals]);
 
     const addGoal = (goal) => {
-        setGoals([
+        setGoals((prev) => [
+            ...prev,
             {
-                id: Date.now(),
+                //id: Date.now(),
+                id: crypto.randomUUID(),
                 ...goal,
                 target: parseFloat(goal.target),
                 saved: parseFloat(goal.saved) || 0,
