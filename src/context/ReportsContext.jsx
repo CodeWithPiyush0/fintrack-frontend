@@ -25,7 +25,7 @@ export const ReportsProvider = ({ children }) => {
             }
 
             if(t.type === "income"){
-                map[month].income += t.income;
+                map[month].income += t.amount;
             } else {
                 map[month].expense += t.amount;
             }
@@ -63,7 +63,7 @@ export const ReportsProvider = ({ children }) => {
 
             return {
                 category: b.category,
-                budget: b.amount,
+                budget: b.limit,
                 spent,
             };
         });
