@@ -9,9 +9,7 @@ import { Download } from "lucide-react";
 
 const Reports = () => {
 
-    const handleFiltersChange = (filters) => {
-        console.log("Report filters changed:", filters)
-    };
+    const [filters, setFilters] = useState({ time: "This Month", category: "All Categories" });
 
     return (
         <div className="min-h-screen bg-[#f8fafc] font-inter pt-20">
@@ -38,16 +36,16 @@ const Reports = () => {
                     </div>
 
                     <div className="flex flex-wrap gap-3 items-center bg-white rounded-2xl shadow-md p-4">
-                        <ReportFilters onChange={handleFiltersChange}/>
+                        <ReportFilters onChange={setFilters}/>
                     </div>
 
                     <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <IncomeExpenseChart />
-                        <CategoryBarChart />
+                        <IncomeExpenseChart filters={filters}/>
+                        <CategoryBarChart filters={filters}/>
                     </section>
 
                     <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <TopExpensesPie />
+                        <TopExpensesPie filters={filters}/>
                     </section>
             </main>
 
