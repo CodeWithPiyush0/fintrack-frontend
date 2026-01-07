@@ -30,13 +30,11 @@ const ReportFilters = ({ onChange }) => {
   return (
     <div className='flex flex-wrap gap-4'>
         <div className='w-full sm:w-auto'>
-            <label className='block text-xs font-medium text-gray-500 mb-1'>
-                Time Period
-            </label>
+            
             <select 
                 value={time}
                 onChange={handleTimeChange}
-                className='w-full sm:w-56 px-3 py-2.5 rounded-xl border border-gray-200'
+                className='px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500'
             >
                 {timeOptions.map((opt) => (
                     <option key={opt} value={opt}>
@@ -47,13 +45,10 @@ const ReportFilters = ({ onChange }) => {
         </div>
         
         <div className='w-full sm:w-auto'>
-            <label className='block text-xs font-medium text-gray-500 mb-1'>
-                All Categories
-            </label>
             <select 
                 value={category}
                 onChange={handleCategoryChange}
-                className='w-full sm:w-56 px-3 py-2.5 rounded-xl border border-gray-200'
+                className='px-4 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500'
             >
                 {categoryOptions.map((opt) => (
                     <option key={opt} value={opt}>

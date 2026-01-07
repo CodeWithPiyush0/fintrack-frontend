@@ -1,7 +1,7 @@
 import React from 'react'
 import { createContext, useContext } from 'react'
 import { useTransactions } from './TransactionContext'
-import { useBudgets } from './BudgetContext'
+import { useBudget } from './BudgetContext'
 import { useGoals } from './GoalsContext'
 
 const ReportsContext = createContext();
@@ -9,7 +9,7 @@ const ReportsContext = createContext();
 export const ReportsProvider = ({ children }) => {
     
     const { transactions } = useTransactions();
-    const { budgets } = useBudgets();
+    const { budgets } = useBudget();
     const { goals } = useGoals();
 
     const getIncomeExpenseTrend = () => {
