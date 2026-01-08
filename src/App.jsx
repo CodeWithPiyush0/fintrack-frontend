@@ -5,6 +5,7 @@ import Transaction from "./pages/Transaction";
 import Budget from "./pages/Budget";
 import Goals from "./pages/Goals";
 import Reports from "./pages/Reports";
+import Profile from "./pages/Profile";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
 import { TransactionProvider } from "./context/TransactionContext";
@@ -72,6 +73,15 @@ function App() {
                     element={
                       <ProtectedRoute>
                         <Reports />
+                      </ProtectedRoute>
+                    }
+                  />
+
+                  <Route
+                    path="/profile"
+                    element={
+                      <ProtectedRoute>
+                        <Profile />
                       </ProtectedRoute>
                     }
                   />

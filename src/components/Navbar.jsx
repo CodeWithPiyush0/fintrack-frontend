@@ -50,7 +50,10 @@ const Navbar = () => {
                 </div>
 
                 <div className="hidden md:flex items-center gap-4">
-                    <UserCircle className="w-6 h-6 text-gray-600 hover:text-[#00b894]" />
+                    <UserCircle 
+                        onClick={() => navigate("/profile")}
+                        className="w-6 h-6 text-gray-600 hover:text-[#00b894] transition" 
+                    />
                     <LogOut
                         onClick={handleLogout}
                         className="w-6 h-6 text-gray-600 cursor-pointer hover:text-[#00b894] transition"
@@ -86,7 +89,13 @@ const Navbar = () => {
                     ))}
 
                     <div className="flex items-center gap-4 pt-2 border-t w-full justify-center">
-                        <UserCircle className="w-6 h-6 text-gray-600 hover:text-[#00b894]" />
+                        <UserCircle 
+                            onClick={() => {
+                                navigate("/profile");
+                                setMenuOpen(false);
+                            }}
+                            className="w-6 h-6 text-gray-600 cursor-pointer hover:text-[#00b894] transition" 
+                        />
                         <LogOut
                             onClick={handleLogout}
                             className="w-6 h-6 text-gray-600 cursor-pointer hover:text-[#00b894] transition"
